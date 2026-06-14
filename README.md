@@ -181,7 +181,7 @@ FLUSH PRIVILEGES;
 ### Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/B-Meghana-Reddy/smart-task-service.git
 cd smart-task-service
 ```
 
