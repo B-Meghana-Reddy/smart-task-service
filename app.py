@@ -3,6 +3,7 @@ from config import Config
 from models import db, Task
 from datetime import datetime
 import logging
+import time
 
 VALID_STATUSES = [
     "Pending",
@@ -21,8 +22,22 @@ app.config.from_object(Config)
 
 db.init_app(app)
 
+
+
 with app.app_context():
-    db.create_all()
+    connected = False
+
+    for _ in range(10):
+        try:
+            db.create_all()
+            connected = True
+            break
+        except Exception:
+            print("Waiting for MySQL...")
+            time.sleep(5)
+
+    if not connected:
+        print("Could not connect to MySQL")
 
 @app.route("/")
 def home():
